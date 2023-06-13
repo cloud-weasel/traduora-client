@@ -21,7 +21,9 @@ jobs:
           registry-url: https://npm.pkg.github.com/
 
       - name: Install depedencies
-        run: npm ci
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GPR }}" >> .npmrc
+          npm ci
 
       - name: Build
         run: npm run build
