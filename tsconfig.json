@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./build",
+    "moduleResolution": "node",
+    "target": "es6",
+    "module": "commonjs",
+    "lib": ["es7", "dom", "es2020"],
+    "strict": true,
+    "declaration": true
+  },
+  "includes": ["./src"]
+}
