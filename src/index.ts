@@ -23,3 +23,5 @@ export async function addTerms(translationsPath: string, url: string, projectId:
     )
   )
 }
+
+export { TraduoraClient } from './traduora-client'
