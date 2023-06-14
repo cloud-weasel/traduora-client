@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { AddTermResponse } from './types'
+import { Term } from './types'
 
 export interface TraduoraClientConfig {
   url: string
@@ -67,7 +67,7 @@ export class TraduoraClient {
     }
   }
 
-  async addTerm(term: string): Promise<AddTermResponse> {
+  async addTerm(term: string): Promise<Term> {
     await this.ensureLogin()
 
     const response = await axios.post(
@@ -102,6 +102,18 @@ export class TraduoraClient {
         },
       }
     )
+
+    return response.data.data
+  }
+
+  async getTerms(): Promise<Term[]> {
+    await this.ensureLogin()
+
+    const response = await axios.get(`${this.url}/api/v1/projects/${this.projectId}/terms`, {
+      headers: {
+        Authorization: `Bearer ${this.token}`,
+      },
+    })
 
     return response.data.data
   }

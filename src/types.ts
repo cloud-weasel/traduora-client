@@ -1,4 +1,4 @@
-export interface AddTermResponse {
+export interface Term {
   id: string
   value: string
   labels: string[]
