@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Term } from './types'
+import { AddTranslationResponse, Term } from './types'
 
 export interface TraduoraClientConfig {
   url: string
@@ -86,7 +86,7 @@ export class TraduoraClient {
     return response.data.data
   }
 
-  async addTranslation(termId: string, locale: string, value: string): Promise<AddTermResponse> {
+  async addTranslation(termId: string, locale: string, value: string): Promise<AddTranslationResponse> {
     await this.ensureLogin()
 
     const response = await axios.patch(
