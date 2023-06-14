@@ -22,7 +22,7 @@ jobs:
 
       - name: Install depedencies
         run: |
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GPR }}" >> .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GRP }}" >> .npmrc
           npm ci
 
       - name: Build
