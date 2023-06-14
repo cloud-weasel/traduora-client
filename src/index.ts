@@ -41,10 +41,9 @@ export async function addTranslations(translationsPath: string, locale: string, 
   const terms = await Traduora.getTerms()
 
   const { edited } = getDiff(en, translations, true)
-  console.log('🚀 ~ file: index.ts:44 ~ addTranslations ~ edited:', edited)
 
   await Promise.all(
-    edited.map(([key, value]) =>
+    edited.map(([key, _, value]) =>
       (async () => {
         const term = terms.find(term => term.value === key)
         if (!term) {
