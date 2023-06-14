@@ -14,6 +14,7 @@ export class TraduoraClient {
   private clientId: string
   private clientSecret: string
   private token: string
+  private expiresAt: number
 
   constructor({ url, projectId, clientId, clientSecret }: TraduoraClientConfig) {
     this.url = url
@@ -21,6 +22,7 @@ export class TraduoraClient {
     this.clientId = clientId
     this.clientSecret = clientSecret
     this.token = ''
+    this.expiresAt = 0
   }
 
   async login(): Promise<void> {
@@ -35,10 +37,11 @@ export class TraduoraClient {
     })
 
     this.token = response.data.access_token
+    this.expiresAt = Date.now() + 82800000 // The token is valid for 24h but the expiresAt is set to + 23h
   }
 
   async ensureLogin(): Promise<void> {
-    if (!this.token) {
+    if (!this.token || Date.now() > this.expiresAt) {
       await this.login()
     }
   }
