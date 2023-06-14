@@ -37,7 +37,15 @@ export class TraduoraClient {
     this.token = response.data.access_token
   }
 
+  async ensureLogin(): Promise<void> {
+    if (!this.token) {
+      await this.login()
+    }
+  }
+
   async getTranslations(locale: string): Promise<JSON> {
+    await this.ensureLogin()
+
     try {
       const response = await axios.get(`${this.url}/api/v1/projects/${this.projectId}/exports?locale=${locale}&format=jsonnested`, {
         headers: {
@@ -56,6 +64,8 @@ export class TraduoraClient {
   }
 
   async addTerm(term: string): Promise<AddTermResponse> {
+    await this.ensureLogin()
+
     const response = await axios.post(
       `${this.url}/api/v1/projects/${this.projectId}/terms`,
       {
@@ -73,6 +83,8 @@ export class TraduoraClient {
   }
 
   async addTranslation(termId: string, locale: string, value: string): Promise<AddTermResponse> {
+    await this.ensureLogin()
+
     const response = await axios.patch(
       `${this.url}/api/v1/projects/${this.projectId}/translations/${locale}`,
       {
