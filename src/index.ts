@@ -2,7 +2,7 @@ import { getDiff } from 'json-difference'
 import { readFileSync } from 'fs'
 import { TraduoraClient } from './traduora-client'
 
-async function main(translationsPath: string, url: string, projectId: string, clientId: string, clientSecret: string) {
+export async function addTerms(translationsPath: string, url: string, projectId: string, clientId: string, clientSecret: string) {
   let translations = JSON.parse(readFileSync(translationsPath, 'utf-8'))
 
   const Traduora = new TraduoraClient({ url, projectId, clientId, clientSecret })
@@ -23,5 +23,3 @@ async function main(translationsPath: string, url: string, projectId: string, cl
     )
   )
 }
-
-main(process.argv[2], process.argv[3], process.argv[4], process.argv[5], process.argv[6])
