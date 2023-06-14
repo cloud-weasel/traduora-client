@@ -15,17 +15,13 @@ export async function addTerms(translationsPath: string, locale: string, config:
 
   const { added } = getDiff(savedTranslations, translations, true)
 
-  await Promise.all(
-    added.map(([key, value]) =>
-      (async () => {
-        if (!config.dryRun) {
-          const term = await Traduora.addTerm(key)
-          await Traduora.addTranslation(term.id, locale, value)
-        }
-        console.log(`Term ${key} added`)
-      })()
-    )
-  )
+  for (const [key, value] of added) {
+    if (!config.dryRun) {
+      const term = await Traduora.addTerm(key)
+      await Traduora.addTranslation(term.id, locale, value)
+    }
+    console.log(`Term ${key} added`)
+  }
 }
 
 export async function addTranslations(translationsPath: string, locale: string, config: TraduoraClientConfig) {
@@ -42,21 +38,17 @@ export async function addTranslations(translationsPath: string, locale: string, 
 
   const { edited } = getDiff(en, translations, true)
 
-  await Promise.all(
-    edited.map(([key, _, value]) =>
-      (async () => {
-        const term = terms.find(term => term.value === key)
-        if (!term) {
-          throw new Error(`Term ${key} not found`)
-        }
+  for (const [key, _, value] of edited) {
+    const term = terms.find(term => term.value === key)
+    if (!term) {
+      throw new Error(`Term ${key} not found`)
+    }
 
-        if (!config.dryRun) {
-          await Traduora.addTranslation(term.id, locale, value)
-        }
-        console.log(`Term ${key} translated to ${value} for locale ${locale}`)
-      })()
-    )
-  )
+    if (!config.dryRun) {
+      await Traduora.addTranslation(term.id, locale, value)
+    }
+    console.log(`Term ${key} translated to ${value} for locale ${locale}`)
+  }
 }
 
 export { TraduoraClient } from './traduora-client'
