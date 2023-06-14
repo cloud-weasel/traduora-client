@@ -6,6 +6,7 @@ export interface TraduoraClientConfig {
   projectId: string
   clientId: string
   clientSecret: string
+  dryRun?: boolean
 }
 
 export class TraduoraClient {
