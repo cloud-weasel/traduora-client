@@ -13,7 +13,7 @@ export async function addTerms(translationsPath: string, locale: string, config:
 
   const savedTranslations = await Traduora.getTranslations(locale)
 
-  const { added } = getDiff(savedTranslations, translations, true)
+  const { added } = getDiff(savedTranslations, translations)
 
   for (const [key, value] of added) {
     if (!config.dryRun) {
@@ -36,7 +36,7 @@ export async function addTranslations(translationsPath: string, locale: string, 
   const en = await Traduora.getTranslations(locale)
   const terms = await Traduora.getTerms()
 
-  const { edited } = getDiff(en, translations, true)
+  const { edited } = getDiff(en, translations)
 
   for (const [key, _, value] of edited) {
     const term = terms.find(term => term.value === key)

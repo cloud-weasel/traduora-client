@@ -1,6 +1,6 @@
 {
   "name": "@cloud-weasel/traduora-client",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "types": "build/index.d.ts",
   "main": "build/index.js",
   "description": "Traduora client for managing terms and translations",
