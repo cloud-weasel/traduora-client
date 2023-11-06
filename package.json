@@ -18,14 +18,14 @@
     "patch": "npm version --no-git-tag-version patch"
   },
   "dependencies": {
-    "axios": "^1.4.0",
-    "json-difference": "^1.9.1"
+    "axios": "^1.6.0",
+    "json-difference": "^1.15.7"
   },
   "devDependencies": {
     "@cloud-weasel/import-sort-style": "^0.1.2",
-    "@types/node": "^20.3.1",
-    "prettier": "^2.8.8",
-    "typescript": "^4.5.5"
+    "@types/node": "^20.8.10",
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2"
   },
   "importSort": {
     ".js, .jsx, .ts, .tsx": {
